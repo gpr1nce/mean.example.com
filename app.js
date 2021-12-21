@@ -9,9 +9,13 @@ var usersRouter = require('./routes/users');
 var config = require('./config.dev');
 var apiUsersRouter = require('./routes/api/users');
 var mongoose = require('mongoose');
-mongoose.connect(config.mongodb, {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true });
+
+var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
+var passport = require('passport');
 
 var app = express();
+mongoose.connect(config.mongodb, {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
