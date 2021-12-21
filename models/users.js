@@ -41,7 +41,7 @@ var Users = new Schema({
       true, 
       'There was a problem creating your password'
     ]
-  },
+  }
 });
 
 Users.pre('save', function(next){
