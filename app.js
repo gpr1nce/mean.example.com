@@ -15,7 +15,7 @@ var apiAuthRouter = require('./routes/api/auth');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 var passport = require('passport');
-
+var authRouter = require('./routes/auth');
 var app = express();
 mongoose.connect(config.mongodb, {
   // useUnifiedTopology: true, 
@@ -74,6 +74,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/api/users', apiUsersRouter);
 app.use('/api/auth', apiAuthRouter);
+app.use('/auth', authRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
