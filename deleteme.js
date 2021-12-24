@@ -1,0 +1,1 @@
+db.articles1.insert({"title":"A first article","slug":"Long ago in a far away land ...","description":"A fine article from our correspondent","keywords":"article","body":"Test 123Test 123 Test 123Test 123 Test 123Test 123 Test 123","published":ISODate("2017-10-13"),"created":ISODate("2017-10-13"),"modified":ISODate("2020-01-01")})
