@@ -77,6 +77,8 @@ app.use(function(req,res,next){
   next();
 });
 
+app.use('/api/auth', apiAuthRouter);
+
 //Session-based access control
 app.use(function(req,res,next){
   //Uncomment the following line to allow access to everything.
