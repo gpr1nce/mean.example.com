@@ -57,6 +57,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.use(Users.createStrategy());
+passport.use(Articles.createStrategy());
 
 passport.serializeUser(function(user, done){
   done(null,{
@@ -71,6 +72,27 @@ passport.serializeUser(function(user, done){
 passport.deserializeUser(function(user, done){
   done(null, user);
 });
+
+// try an articles version of the serial/deserial
+passport.serializeArticle(function(article, done){
+  done(null,{
+    id: article._id,
+    title: article.title,
+    slug: article.slug,
+    description: article.description,
+    keywords: article.keywords,
+    body: article.body,
+    published: article.published,
+    created: article.created,
+    modified: article.modified
+  });
+});
+
+passport.deserializeArticle(function(article, done){
+  done(null, article);
+});
+
+
 
 app.use(function(req,res,next){
   res.locals.session = req.session;
