@@ -35,7 +35,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-//~line 32 before routes
+
 app.use(require('express-session')({
   //Define the session store
   store: new MongoStore({

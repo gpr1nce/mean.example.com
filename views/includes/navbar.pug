@@ -22,7 +22,8 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
             span.sr-only (current)
 
         //if !session.passport.user
-        if !session.passport
+        //- 12.26 restored ".user" below and menu items worked as expected until 12.27 1331. 
+        if !session.passport.user
           li.nav-item
             a.nav-link(href='/auth#register') Register
           li.nav-item
