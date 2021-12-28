@@ -11,10 +11,10 @@ router.get('/', function(req, res, next) {
       });
 });
 
-router.get('/:articleId', function(req,res){
-    var articleId = req.params.articleId;
-    Articles.findOne({'_id':articleId}, function(err, article){
-      if(err){
+router.get('/:id', function(req,res){
+    var id = req.params.id;
+    Articles.findOne({'_id':id}, function(err, article){
+      if(err){console.log(err);  
        return res.json({'success':false, 'error': err});
      }
       return res.json({'success':true, 'article': article});
@@ -24,13 +24,13 @@ router.get('/:articleId', function(req,res){
 router.post('/', function(req, res) {
     Articles.create(new Articles({
         title: req.body.title,
-        slug: req.body.slug,
-        description: req.body.description,
-        keywords: req.body.keywords,
-        body: req.body.body,
-        published: req.body.published,
-        created: req.body.created,
-        modified: req.body.modified
+        // slug: req.body.slug,
+        // description: req.body.description,
+        // keywords: req.body.keywords,
+        // body: req.body.body,
+        // published: req.body.published
+        // created: req.body.created,
+        // modified: req.body.modified
       }), function(err, article){
         
         if(err){
@@ -51,7 +51,7 @@ router.put('/', function(req, res){
      
         if(article) {
      
-         let data = req.body;
+        let data = req.body;
      
          if(data.title){
            article.title = data.title;
@@ -77,13 +77,13 @@ router.put('/', function(req, res){
             article.published = data.published;
             };
            
-        if(data.created){
-            article.created = data.created;
-            };
+        // if(data.created){
+        //     article.created = data.created;
+        //     };
                
-        if(data.modified){
-            article.modified = data.modified;
-            };
+        // if(data.modified){
+        //     article.modified = data.modified;
+        //     };
                    
          article.save(function(err){
            if(err){

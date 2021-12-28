@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var slug = require('slug');
+// var passportLocalMongoose = require('passport-local-mongoose'); 
 
 //Create a schema
 var Articles = new Schema({
@@ -53,5 +54,9 @@ Articles.pre('save', function(next){
   this.modified = new Date().toISOString();
   next();
 });
+
+//Add validation property as for users
+// Users.plugin(uniqueValidator);
+// Articles.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model('Articles', Articles);

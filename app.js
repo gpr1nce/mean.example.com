@@ -57,7 +57,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.use(Users.createStrategy());
-passport.use(Articles.createStrategy());
+// passport.use(Articles.createStrategy());
 
 passport.serializeUser(function(user, done){
   done(null,{
@@ -74,23 +74,23 @@ passport.deserializeUser(function(user, done){
 });
 
 // try an articles version of the serial/deserial
-passport.serializeArticle(function(article, done){
-  done(null,{
-    id: article._id,
-    title: article.title,
-    slug: article.slug,
-    description: article.description,
-    keywords: article.keywords,
-    body: article.body,
-    published: article.published,
-    created: article.created,
-    modified: article.modified
-  });
-});
+// passport.serializeArticle(function(article, done){
+//   done(null,{
+//     id: article._id,
+//     title: article.title,
+//     slug: article.slug,
+//     description: article.description,
+//     keywords: article.keywords,
+//     body: article.body,
+//     published: article.published,
+//     created: article.created,
+//     modified: article.modified
+//   });
+// });
 
-passport.deserializeArticle(function(article, done){
-  done(null, article);
-});
+// passport.deserializeArticle(function(article, done){
+//   done(null, article);
+// });
 
 
 
@@ -104,7 +104,7 @@ app.use('/api/auth', apiAuthRouter);
 //Session-based access control
 app.use(function(req,res,next){
   //Uncomment the following line to allow access to everything.
-  //return next();
+  // return next();
 
   //Allow any endpoint that is an exact match. The server does not
   //have access to the hash so /auth and /auth#xxx would bot be considered 
