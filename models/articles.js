@@ -18,7 +18,7 @@ var Articles = new Schema({
   keywords: String,
   body: String,
   published: {
-    type: Date
+    type: Date,
     default: Date.now
   },
   created: {
@@ -44,7 +44,7 @@ Articles.pre('validate', function(next){
   //If no published date has been provided use the current date?
   if(this.published==undefined){
     // error? vthis was this.mod
-    this.published = Date.now.toISOString();
+    this.modified = new Date().toISOString();
   }
 
   this.modified = new Date().toISOString();
