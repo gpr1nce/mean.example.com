@@ -20,8 +20,10 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
           a.nav-link(href='/')
             | Home 
             span.sr-only (current)
-        //if !session.passport.user
-        if !session.passport
+        //- if req.session.loggedin
+        //- if loggedin
+        //- if !loggedin
+        if !session.user
           li.nav-item
             a.nav-link(href='/auth#register') Register
           li.nav-item
@@ -33,5 +35,5 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
             a.nav-link(href='/articles/app') CMS
           li.nav-item
             a.nav-link(href='/auth/logout') Logout
-        li.nav-item
+          li.nav-item
             a.nav-link(href='/articles') Articles

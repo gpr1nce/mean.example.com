@@ -36,6 +36,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// express start session here?
 app.use(require('express-session')({
   //Define the session store
   store: new MongoStore({
@@ -56,6 +57,8 @@ app.use(require('express-session')({
 app.use(passport.initialize());
 app.use(passport.session());
 
+res.locals.loggedin = passport.session;
+
 passport.use(Users.createStrategy());
 // passport.use(Articles.createStrategy());
 
@@ -73,33 +76,10 @@ passport.deserializeUser(function(user, done){
   done(null, user);
 });
 
-// try an articles version of the serial/deserial
-// passport.serializeArticle(function(article, done){
-//   done(null,{
-//     id: article._id,
-//     title: article.title,
-//     slug: article.slug,
-//     description: article.description,
-//     keywords: article.keywords,
-//     body: article.body,
-//     published: article.published,
-//     created: article.created,
-//     modified: article.modified
-//   });
-// });
-
-// passport.deserializeArticle(function(article, done){
-//   done(null, article);
-// });
-
-
-
 app.use(function(req,res,next){
   res.locals.session = req.session;
   next();
 });
-
-app.use('/api/auth', apiAuthRouter);
 
 //Session-based access control
 app.use(function(req,res,next){
@@ -140,6 +120,8 @@ app.use(function(req,res,next){
 
   //There is an active user session, allow access to all endpoints.
   if(req.isAuthenticated()){
+    // per stackoverflow 12.29
+    req.session.loggedin= true;
     return next();
   }
 
@@ -167,6 +149,8 @@ app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.locals.loggedin = req.session.loggedin;
+
 
   // render the error page
   res.status(err.status || 500);

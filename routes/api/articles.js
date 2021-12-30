@@ -28,7 +28,7 @@ router.post('/', function(req, res) {
         // description: req.body.description,
         // keywords: req.body.keywords,
         // body: req.body.body,
-        // published: req.body.published
+        published: req.body.published
         // created: req.body.created,
         // modified: req.body.modified
       }), function(err, article){
@@ -77,14 +77,6 @@ router.put('/', function(req, res){
             article.published = data.published;
             };
            
-        // if(data.created){
-        //     article.created = data.created;
-        //     };
-               
-        // if(data.modified){
-        //     article.modified = data.modified;
-        //     };
-                   
          article.save(function(err){
            if(err){
              return res.json({success: false, error: err});

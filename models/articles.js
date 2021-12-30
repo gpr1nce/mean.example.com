@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var slug = require('slug');
-// var passportLocalMongoose = require('passport-local-mongoose'); 
+var passportLocalMongoose = require('passport-local-mongoose'); 
 
 //Create a schema
 var Articles = new Schema({
@@ -19,6 +19,7 @@ var Articles = new Schema({
   body: String,
   published: {
     type: Date
+    default: Date.now
   },
   created: {
     type: Date,
@@ -40,9 +41,10 @@ Articles.pre('validate', function(next){
     }
   }
 
-  //If no published date has been provided use the current date
+  //If no published date has been provided use the current date?
   if(this.published==undefined){
-    this.modified = new Date().toISOString();
+    // error? vthis was this.mod
+    this.published = Date.now.toISOString();
   }
 
   this.modified = new Date().toISOString();
@@ -57,6 +59,6 @@ Articles.pre('save', function(next){
 
 //Add validation property as for users
 // Users.plugin(uniqueValidator);
-// Articles.plugin(passportLocalMongoose);
+Articles.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model('Articles', Articles);

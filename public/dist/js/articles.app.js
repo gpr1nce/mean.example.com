@@ -46,12 +46,7 @@ xhr.onload = function(){
           <thead>
             <tr>
             <td>Title</td>
-            <td>Body</td>
-            <td>Description</td>
-            <td>Keywords</td>
             <td>Published</td>
-            <td>Created</td>
-            <td>Modified</td>
             </tr>
           </thead>
           <tbody>${rows}</tbody>

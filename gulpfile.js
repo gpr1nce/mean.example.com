@@ -64,8 +64,8 @@ gulp.task('build-articles-js', function() {
   var articleApp = gulp.src([
     'src/js/articles.app.js',
   ])
-  // .pipe(concat('articles.app.min.js'))
-  // .pipe(uglify())
+  .pipe(concat('articles.app.min.js'))
+  .pipe(uglify())
   .pipe(gulp.dest('public/dist/js'));
 
   return merge(articleApp);
